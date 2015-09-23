@@ -8,3 +8,34 @@ Takes the output from the phase_everyone pipeline, and assembles it into a file 
 ```
 bash step1.sh
 ```
+
+
+#Step 3
+
+You need a pop map of your samples e.g.
+```
+Pop_1 kaloula_baleata_jam3573
+Pop_1 kaloula_baleata_lsuhc5712
+Pop_1 kaloula_baleata_rmb2401
+Pop_1 kaloula_cfbaleata_acd1303
+Pop_2 kaloula_cfconjuncta_rmb2920
+Pop_2 kaloula_cfkalingensis_mgs2
+Pop_2 kaloula_conjuncta_cds5679
+Pop_2 kaloula_conjuncta_rmb4849
+Pop_1 kaloula_indochinensis_rom32932
+Pop_2 kaloula_kocakii_rmb9813
+Pop_1 kaloula_mediolineata_dsm1236m
+Pop_2 kaloula_meridionalis_acd4178
+Pop_2 kaloula_meridionalis_rmb656
+Pop_2 kaloula_negrosensis_gvag253
+Pop_2 kaloula_negrosensis_rmb2251
+Pop_2 kaloula_picta_rmb11744
+Pop_2 kaloula_pictameridionalishybrid_rmb586
+Pop_1 kaloula_pulchra_dsm1235l
+Pop_2 kaloula_realkalingensis_rmb1887
+Pop_2 kaloula_rigida_acd1570
+Pop_2 kaloula_rigida_rmb14880
+Pop_2 kaloula_spnoveluzoncfkalingensis_rmb11959
+Pop_2 kaloula_walteri_rmb5662
+Pop_2 kaloula_waray_rmb4321
+```
