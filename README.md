@@ -2,15 +2,16 @@
 Takes the output from the phase_everyone pipeline, and assembles it into a file that can be inputted into migrate. First, it takes the phased alleles for each sample, and creates a consensus with ambiguity codes. Then it writes out these files into locus-specific fasta files using the sample names as sequence headers. Finally, it takes these files and creates the migrate file.
 
 #Step 1 (ambgooifying the phased files): What it needs to work
--- A folder of *.fa files resulting from phase_everyone (https://github.com/laninsky/phase_everyone)
--- step1.sh and step1.R
+-- A folder of *.fa files (two files for each sample containing the alternate alleles for all the samples) resulting from phase_everyone (https://github.com/laninsky/phase_everyone)
+-- step1.sh, step1A.R and step1B.R
 -- to run:
 ```
 bash step1.sh
 ```
 
+step1A.R is pulling out all of the loci from each sample file and dumping them into locus.fasta files. These are then run through MAFFT as the output of phase_everyone strips indels. The (re)-aligned fasta files are then pulled through step1B.R to create a single consensus sequence for each sample. 
 
-#Step 3
+#Step 2
 
 You need a pop map of your samples e.g.
 ```
