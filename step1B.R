@@ -29,31 +29,22 @@ to_write[tablelength,1] <- sequencepaste
 rm(j)
 rm(rows)
 rm(sequencepaste)
-rm(tablelength)
 rm(temp)
 rm(to_write_seq)
 rm(to_write_title)
 
+output <- matrix(NA,ncol=1,nrow=(as.numeric(numtaxa)*2))
+ambig <- c("N","R","Y","S","W","K","M","B","D","H","V", "n","r","y","s","w","k","m","b","d","h","v")
+k <- 1
 
-
-
-
-
-### Need to oneline first
-
-
-output <- matrix(NA,ncol=1,nrow=(rows))
-sequencename <- paste(">",samplename[1,1],sep="")
-ambig <- c("-","N","R","Y","S","W","K","M","B","D","H","V")
-
-for (i in 1:rows) {
-if ((length(grep(">",temp1[i,1])))>0) {
-outputname <- gsub(">","",temp1[i,1])
-if (temp1[(i+1),1]==temp2[(i+1),1]) {
-output <- rbind(sequencename,temp1[(i+1),1])
+for (i in 1:tablelength) {
+if ((length(grep("\\.1",to_write[i,1])))>0) {
+output[k,1] <- gsub("\\.1","",to_write[i,1])
+if (to_write[(i+1),1]==to_write[(i+3),1]) {
+seqoutput <- to_write[(i+1),1]
 } else {
-temp1seq <- unlist(strsplit(temp1[(i+1),1],""))
-temp2seq <- unlist(strsplit(temp2[(i+1),1],""))
+temp1seq <- unlist(strsplit(to_write[(i+1),1],""))
+temp2seq <- unlist(strsplit(to_write[(i+3),1],""))
 seqlength <- length(temp1seq)
 seqoutput <- NULL
 for (j in 1:seqlength) {
@@ -61,63 +52,71 @@ if(temp1seq[j]==temp2seq[j]) {
 seqoutput <- paste(seqoutput,temp1seq[j],sep="")
 } else {
 
-if(temp1seq[j]=="A") {
+if(temp1seq[j]=="A" || temp1seq[j]=="a") {
 if(temp2seq[j] %in% ambig) {
 seqoutput <- paste(seqoutput,temp1seq[j],sep="")
 }
-if(temp2seq[j]=="C") {
+if(temp2seq[j]=="C" || temp2seq[j]=="c") {
 seqoutput <- paste(seqoutput,"M",sep="")
 }
-if(temp2seq[j]=="G") {
+if(temp2seq[j]=="G" || temp2seq[j]=="g") {
 seqoutput <- paste(seqoutput,"R",sep="")
 }
-if(temp2seq[j]=="T") {
+if(temp2seq[j]=="T" || temp2seq[j]=="t") {
 seqoutput <- paste(seqoutput,"W",sep="")
 }
 }
 
-if(temp1seq[j]=="C") {
+if(temp1seq[j]=="C" || temp1seq[j]=="c") {
 if(temp2seq[j] %in% ambig) {
 seqoutput <- paste(seqoutput,temp1seq[j],sep="")
 }
-if(temp2seq[j]=="A") {
+if(temp2seq[j]=="A" || temp2seq[j]=="a") {
 seqoutput <- paste(seqoutput,"M",sep="")
 }
-if(temp2seq[j]=="G") {
+if(temp2seq[j]=="G" || temp2seq[j]=="g") {
 seqoutput <- paste(seqoutput,"S",sep="")
 }
-if(temp2seq[j]=="T") {
+if(temp2seq[j]=="T" || temp2seq[j]=="t") {
 seqoutput <- paste(seqoutput,"Y",sep="")
 }
 }
 
-if(temp1seq[j]=="G") {
+if(temp1seq[j]=="G" || temp1seq[j]=="g") {
 if(temp2seq[j] %in% ambig) {
 seqoutput <- paste(seqoutput,temp1seq[j],sep="")
 }
-if(temp2seq[j]=="A") {
+if(temp2seq[j]=="A" || temp2seq[j]=="a") {
 seqoutput <- paste(seqoutput,"R",sep="")
 }
-if(temp2seq[j]=="C") {
+if(temp2seq[j]=="C" || temp2seq[j]=="c") {
 seqoutput <- paste(seqoutput,"S",sep="")
 }
-if(temp2seq[j]=="T") {
+if(temp2seq[j]=="T" || temp2seq[j]=="t") {
 seqoutput <- paste(seqoutput,"K",sep="")
 }
 }
 
-if(temp1seq[j]=="T") {
+if(temp1seq[j]=="T" || temp1seq[j]=="t") {
 if(temp2seq[j] %in% ambig) {
 seqoutput <- paste(seqoutput,temp1seq[j],sep="")
 }
-if(temp2seq[j]=="A") {
+if(temp2seq[j]=="A" || temp2seq[j]=="a") {
 seqoutput <- paste(seqoutput,"W",sep="")
 }
-if(temp2seq[j]=="C") {
+if(temp2seq[j]=="C" || temp2seq[j]=="c") {
 seqoutput <- paste(seqoutput,"Y",sep="")
 }
-if(temp2seq[j]=="G") {
+if(temp2seq[j]=="G" || temp2seq[j]=="g") {
 seqoutput <- paste(seqoutput,"K",sep="")
+}
+}
+
+if(temp1seq[j]=="-") {
+if(temp2seq[j] %in% ambig) {
+seqoutput <- paste(seqoutput,temp1seq[j],sep="")
+} else {
+seqoutput <- paste(seqoutput,temp2seq[j],sep="")
 }
 }
 
@@ -131,14 +130,12 @@ seqoutput <- paste(seqoutput,temp2seq[j],sep="")
 
 }
 }
-output <- rbind(sequencename,seqoutput)
-}
-write.table(output, outputname,quote=FALSE, col.names=FALSE,row.names=FALSE, append=TRUE)
-}
 }
 
+output[(k+1),1] <- toupper(seqoutput)
+k <- k+2
+}
+}
 
-### Up to here...
-
-
-write.table(output, outputname,quote=FALSE, col.names=FALSE,row.names=FALSE, append=TRUE)
+outputname <- paste(samplename[1,1],".fa",sep="")
+write.table(output, outputname,quote=FALSE, col.names=FALSE,row.names=FALSE)
