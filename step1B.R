@@ -1,8 +1,47 @@
-temp1 <- read.table("temp",header=FALSE,stringsAsFactors=FALSE,sep="\t")
-temp2 <- read.table("temp2",header=FALSE,stringsAsFactors=FALSE,sep="\t")
+temp <- read.table("temp",header=FALSE,stringsAsFactors=FALSE,sep="\t")
 samplename <- read.table("tempnamefile",header=FALSE,stringsAsFactors=FALSE,sep="\t")
+numtaxa <- read.table("numtaxa",header=FALSE,stringsAsFactors=FALSE,sep="\t")
 
-rows <- dim(temp1)[1]
+rows <- dim(temp)[1]
+tablelength <- as.numeric(numtaxa[1,1])*4
+
+to_write <- matrix(NA,ncol=1,nrow=tablelength)
+to_write[1,1] <- temp[1,1]
+
+to_write_title <- 2
+sequencepaste <- NULL
+
+for (j in 2:rows) {
+if ((length(grep(">",temp[j,1])))>0) {
+to_write_seq <- to_write_title
+to_write_title <- to_write_title + 1
+to_write[to_write_seq,1] <- sequencepaste
+to_write[to_write_title,1] <- temp[j,1]
+to_write_title <- to_write_title + 1
+sequencepaste <- NULL
+} else {
+sequencepaste <- paste(sequencepaste,temp[j,1],sep="")
+}
+}
+
+to_write[tablelength,1] <- sequencepaste
+
+rm(j)
+rm(rows)
+rm(sequencepaste)
+rm(tablelength)
+rm(temp)
+rm(to_write_seq)
+rm(to_write_title)
+
+
+
+
+
+
+### Need to oneline first
+
+
 output <- matrix(NA,ncol=1,nrow=(rows))
 sequencename <- paste(">",samplename[1,1],sep="")
 ambig <- c("-","N","R","Y","S","W","K","M","B","D","H","V")
