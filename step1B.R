@@ -3,7 +3,7 @@ temp2 <- read.table("temp2",header=FALSE,stringsAsFactors=FALSE,sep="\t")
 samplename <- read.table("tempnamefile",header=FALSE,stringsAsFactors=FALSE,sep="\t")
 
 rows <- dim(temp1)[1]
-output <- matrix(NA,ncol=2,nrow=(rows/2))
+output <- matrix(NA,ncol=1,nrow=(rows))
 sequencename <- paste(">",samplename[1,1],sep="")
 ambig <- c("-","N","R","Y","S","W","K","M","B","D","H","V")
 
