@@ -12,7 +12,8 @@ done
 for i in *.fasta; 
 do mv $i temp;
 mafft temp > $i;
-done;
+done
+
 rm temp
 
 for i in *.fasta; 
@@ -20,4 +21,5 @@ do name=`echo $i | sed 's/.fasta//'`;
 echo $name > tempnamefile;
 mv $i temp;
 Rscript step1B.R;
-rm -rf temp*
+rm -rf temp*;
+done
