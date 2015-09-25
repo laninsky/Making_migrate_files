@@ -13,9 +13,15 @@ bash step1.sh
 
 step1A.R is pulling out all of the loci from each sample file and dumping them into locus.fasta files. These are then run through MAFFT as the output of phase_everyone strips indels. The (re)-aligned fasta files are then pulled through step1B.R to create a single consensus sequence for each sample. 
 
-#Step 2
+#Step 2 (building the migrate file): What it needs to work
+-- Your output *.fasta files from step 1 (or if you are just using this step of the script, a folder of *.fasta files from some other pipeline).
 
-You need a pop map of your samples e.g.
+-- A pop_map file showing which samples are found in which population (see below). Because migrate has severe limits on sample name lengths, this file will also be used to rename your samples in the migrate file (a key.txt file will be spat out with which migrate file sample name corresponds to what actual sample name).
+
+-- step2.sh, step2A.R and step2B.R in the same folder as the *.fasta files.
+
+# Pop map designations
+You need a pop_map file of your samples, separated by white space, with the population designations in the first column, and the sample names in the second column e.g.
 ```
 Pop_1 kaloula_baleata_jam3573
 Pop_1 kaloula_baleata_lsuhc5712
