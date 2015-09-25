@@ -5,6 +5,7 @@ Takes the output from the phase_everyone pipeline, and assembles it into a file 
 -- A folder of *.fa files (two files for each sample containing the alternate alleles for all the samples e.g. sampleA.1.fa and sampleA.2.fa) resulting from phase_everyone (https://github.com/laninsky/phase_everyone). I'd suggest copying these into a new folder just in case you ever want to go back to the phased data.
 
 -- step1.sh, step1A.R and step1B.R in the same folder as the *.fa files.
+
 -- to run:
 ```
 bash step1.sh
