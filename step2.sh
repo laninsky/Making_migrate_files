@@ -6,3 +6,4 @@ echo $i >> temp;
 cat $i >> temp;
 done
 
+Rscript step2.R
