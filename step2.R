@@ -41,13 +41,24 @@ numloci <- sum(temp[,1]=="NEW_LOCUS")
 
 firstline <- paste(numpops,numloci,"name",sep=" ")
 secondline <- NULL
-logmatrix <- matrix(ncol=numpops)
+
+for (i in 1:numpops) {
+assign(paste("recmatrix",i,sep=""),matrix(""))
+}
+
+for (i in 1:numpops) {
+assign(paste("locusmatrix",i,sep=""),matrix(""))
+}
+
 
 templength <- dim(temp)[1]
 
 i <- 1
 while (i <= templength) {
 if (temp[i,1]=="NEW_LOCUS") {
+for (k in 1:numpops) {
+assign(paste("tempmatrix",k,sep=""),matrix(NA))
+}
 newtemp <- temp[i+2:(i+(2*notaxa)),1]
 newtemplen <- length(newtemp)
 misstemp <- NULL
@@ -60,5 +71,32 @@ misstemp <- append(misstemp, newtemp[j])
 }
 }
 secondline <- paste(secondline,nchar(misstemp[2])," ",sep="")
+misstemplen <- length(misstemp)
 
-#UP TO HERE - # NEED TO TRAWL THROUGH MISSTEMP AND PULL OUT AND RENAME SAMPLES BY POP AND NEWNAMES, AND WORK OUT HOW MANY SAMPLES THERE ARE FOR EACH POP AND APPEND THIS TO TOP LINE OF MATRIX
+for (j in 1:misstemplen) {
+if ((length(grep(">",misstemp[j])))>0) {
+for (k in 1:notaxa) {
+if ((length(grep(key[k,2],misstemp[j])))>0) {
+toadd <- paste(key[k,3]," ",misstemp[j+1],sep="")
+for (m in 1:numpops) {
+if (key[k,1]==popnames[m]) {
+assign(paste("tempmatrix",m,sep=""),(rbind(get(paste("tempmatrix",m,sep="")),toadd)))
+assign(paste("recmatrix",m,sep=""),(rbind(get(paste("recmatrix",m,sep="")),toadd)))
+break
+}
+}
+break
+}
+}
+}
+}
+
+for (m in 1:numpops) {
+nosamples <- dim(get(paste("tempmatrix",m,sep="")))[1] - 1
+assign(paste("locusmatrix",m,sep=""),paste(get(paste("locusmatrix",m,sep="")),nosamples," ",sep=""))
+}
+}
+i <- i+1
+}
+
+#If this loop has worked, need to bind the various matrices together - don't forget to paste "population 1", "population 2" on the end of the locusmatrix lines.
