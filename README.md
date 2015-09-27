@@ -62,7 +62,7 @@ This code was first published in: TBD
 
 If you could cite the pub, and the progam as below, that would be lovely:
 
-Alexander, A. 2015. phase_everyone_into_migrate v0.0.0. Available from https://github.com/laninsky/phase_everyone
+Alexander, A. 2015. phase_everyone_into_migrate v0.0.0. Available from https://github.com/laninsky/phase_everyone_into_migrate
 
 This pipeline also wouldn't be possible without:
 
