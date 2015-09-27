@@ -56,3 +56,17 @@ Pop_2 kaloula_spnoveluzoncfkalingensis_rmb11959
 Pop_2 kaloula_walteri_rmb5662
 Pop_2 kaloula_waray_rmb4321
 ```
+
+#Suggested citation
+This code was first published in: TBD
+
+If you could cite the pub, and the progam as below, that would be lovely:
+
+Alexander, A. 2015. phase_everyone_into_migrate v0.0.0. Available from https://github.com/laninsky/phase_everyone
+
+This pipeline also wouldn't be possible without:
+
+R: R Core Team. 2015. R: A language and environment for statistical computing. URL http://www.R-project.org/. R Foundation for Statistical Computing, Vienna, Austria. https://www.r-project.org/
+
+#Version history
+v0.0.0: still a work in progress
