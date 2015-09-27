@@ -33,5 +33,13 @@ rm(morhyph)
 rm(newname)
 rm(samplename)
 
+write.table(key, "key.txt",quote=FALSE, col.names=FALSE,row.names=FALSE)
 
-#UP TO HERE - NEED TO WRITE OUT THE KEY, ALSO NEED TO WORK OUT THE NUMBER OF POPS USING UNIQUE, AND THEN SPAWN SINGLE COLUMN MATRICES FOR EACH OF THE POPS
+popnames <- unique(key[,1])
+numpops <- length(popnames)
+
+numloci <- sum(temp[,1]=="NEW_LOCUS")
+
+
+
+#UP TO HERE - ALSO NEED TO WORK OUT THE NUMBER OF POPS USING UNIQUE, AND THEN SPAWN SINGLE COLUMN MATRICES FOR EACH OF THE POPS
