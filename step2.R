@@ -37,9 +37,28 @@ write.table(key, "key.txt",quote=FALSE, col.names=FALSE,row.names=FALSE)
 
 popnames <- unique(key[,1])
 numpops <- length(popnames)
-
 numloci <- sum(temp[,1]=="NEW_LOCUS")
 
+firstline <- paste(numpops,numloci,"name",sep=" ")
+secondline <- NULL
+logmatrix <- matrix(ncol=numpops)
 
+templength <- dim(temp)[1]
 
-#UP TO HERE - ALSO NEED TO WORK OUT THE NUMBER OF POPS USING UNIQUE, AND THEN SPAWN SINGLE COLUMN MATRICES FOR EACH OF THE POPS
+i <- 1
+while (i <= templength) {
+if (temp[i,1]=="NEW_LOCUS") {
+newtemp <- temp[i+2:(i+(2*notaxa)),1]
+newtemplen <- length(newtemp)
+misstemp <- NULL
+for (j in 1:newtemplen) {
+if ((length(grep(">",newtemp[j])))<=0) {
+if (!(nchar(gsub("-","",(gsub("N","",newtemp[j]))))==0)) {
+misstemp <- append(misstemp, newtemp[j-1])
+misstemp <- append(misstemp, newtemp[j])
+}
+}
+}
+secondline <- paste(secondline,nchar(misstemp[2])," ",sep="")
+
+#UP TO HERE - # NEED TO TRAWL THROUGH MISSTEMP AND PULL OUT AND RENAME SAMPLES BY POP AND NEWNAMES, AND WORK OUT HOW MANY SAMPLES THERE ARE FOR EACH POP AND APPEND THIS TO TOP LINE OF MATRIX
