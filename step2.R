@@ -50,16 +50,16 @@ for (i in 1:numpops) {
 assign(paste("locusmatrix",i,sep=""),matrix(""))
 }
 
+for (k in 1:numpops) {
+assign(paste("tempmatrix",k,sep=""),matrix(NA))
+}
 
 templength <- dim(temp)[1]
 
 i <- 1
 while (i <= templength) {
 if (temp[i,1]=="NEW_LOCUS") {
-for (k in 1:numpops) {
-assign(paste("tempmatrix",k,sep=""),matrix(NA))
-}
-newtemp <- temp[i+2:(i+(2*notaxa)),1]
+newtemp <- temp[(i+2):(i+1+(2*notaxa)),1]
 newtemplen <- length(newtemp)
 misstemp <- NULL
 for (j in 1:newtemplen) {
@@ -82,10 +82,8 @@ for (m in 1:numpops) {
 if (key[k,1]==popnames[m]) {
 assign(paste("tempmatrix",m,sep=""),(rbind(get(paste("tempmatrix",m,sep="")),toadd)))
 assign(paste("recmatrix",m,sep=""),(rbind(get(paste("recmatrix",m,sep="")),toadd)))
-break
 }
 }
-break
 }
 }
 }
@@ -94,9 +92,25 @@ break
 for (m in 1:numpops) {
 nosamples <- dim(get(paste("tempmatrix",m,sep="")))[1] - 1
 assign(paste("locusmatrix",m,sep=""),paste(get(paste("locusmatrix",m,sep="")),nosamples," ",sep=""))
+assign(paste("tempmatrix",m,sep=""),matrix(NA))
 }
 }
 i <- i+1
 }
 
-#If this loop has worked, need to bind the various matrices together - don't forget to paste "population 1", "population 2" on the end of the locusmatrix lines.
+secondline <- paste(secondline,"removespace",sep="")
+secondline <- gsub(" removespace","",secondline)
+firstline <- rbind(firstline,secondline)
+
+for (m in 1:numpops) {
+loci_to_bind <- assign(paste("locusmatrix",m,sep=""),paste(get(paste("locusmatrix",m,sep="")),popnames[m],sep=""))
+firstline <- rbind(firstline,loci_to_bind)
+tempdata_to_bind <- get(paste("recmatrix",m,sep=""))
+maxdata <- dim(tempdata_to_bind)[1]
+data_to_bind <- as.matrix(tempdata_to_bind[2:maxdata,1])
+firstline <- rbind(firstline,data_to_bind)
+}
+
+write.table(firstline, "migrate.txt",quote=FALSE, col.names=FALSE,row.names=FALSE)
+
+q()
