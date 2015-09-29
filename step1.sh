@@ -1,12 +1,20 @@
 ls *.1.fa | wc -l > numtaxa
 echo 0 > subfile
 
+ls *.1.fa > filenames
+checknames=`tail -n+1 filenames | head -n1`
+cat $checknames > temp
+Rscript step1A.R;
+rename.sh
+rm temp
+
+
 for i in `ls *1.fa`;
 do name=`echo $i | sed 's/.1.fa//'`;
 echo $name > tempnamefile;
 mv $i temp;
 mv $name.2.fa temp2;
-Rscript step1A.R;
+Rscript step1B.R;
 rm -rf temp*;
 done
 
@@ -21,6 +29,9 @@ for i in *.fasta;
 do name=`echo $i | sed 's/.fasta//'`;
 echo $name > tempnamefile;
 mv $i temp;
-Rscript step1B.R;
+Rscript step1A.R;
 rm -rf temp*;
 done
+
+rm subfile
+rm filenames
