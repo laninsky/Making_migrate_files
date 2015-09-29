@@ -5,9 +5,10 @@ ls *.1.fa > filenames
 checknames=`tail -n+1 filenames | head -n1`
 cat $checknames > temp
 Rscript step1A.R;
-rename.sh
+bash rename.sh
 rm temp
-
+rm rename.sh
+rm filenames
 
 for i in `ls *1.fa`;
 do name=`echo $i | sed 's/.1.fa//'`;
