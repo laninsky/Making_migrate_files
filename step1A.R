@@ -28,7 +28,7 @@ sedcommands <- rbind(sedcommands,sedcommandstemp)
 script1 <- as.matrix(sedcommands)
 script1 <- rbind("for f in `ls *.fa`; do",script1,"done")
 
-write.table(sedcommands,"rename.sh",quote=FALSE, row.names=FALSE,col.names=FALSE)
+write.table(script1,"rename.sh",quote=FALSE, row.names=FALSE,col.names=FALSE)
 write.table(newname,"locikey",quote=FALSE, row.names=FALSE,col.names=FALSE)
 
 q()
