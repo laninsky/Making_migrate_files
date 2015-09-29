@@ -8,10 +8,10 @@ numname <- 0
 for (i in 1:rows) {
 if ((length(grep(">",temp1[i,1])))>0) {
 if (nchar(temp1[i,1])>15) {
-lociname <- numname
+lociname <- paste(">",numname,sep="")
 numname <- numname + 1
 } else {
-lociname <- gsub(">","",temp1[i,1])
+lociname <- temp1[i,1]
 }
 if (!((length(grep("fasta",temp1[i,1])))>0)) {
 lociname <- paste(lociname,".fasta",sep="")
