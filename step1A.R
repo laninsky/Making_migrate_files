@@ -8,22 +8,7 @@ sequencename2 <- paste(">",samplename[1,1],".2",sep="")
 
 for (i in 1:rows) {
 if ((length(grep(">",temp1[i,1])))>0) {
-if (nchar(temp1[i,1])>15) {
-subname <- as.matrix(read.table("subfile",header=FALSE,stringsAsFactors=FALSE,sep="\t"))
-lociname <-  as.numeric(subname[1,1])
-locikey <- paste(temp1[i,1],as.numeric(subname[1,1]))
-write.table(locikey, "locikey",quote=FALSE, col.names=FALSE,row.names=FALSE, append=TRUE)
-subname <- as.numeric(subname[1,1]) + 1
-write.table(subname, "subfile",quote=FALSE, col.names=FALSE,row.names=FALSE)
-} else {
-lociname <- temp1[i,1]
-}
-if (!((length(grep("fasta",temp1[i,1])))>0)) {
-lociname <- paste(lociname,".fasta",sep="")
-}
-
-outputname <- gsub(">","",lociname)
-
+outputname <- gsub(">","",temp1[i,1])
 output <- rbind(sequencename1, temp1[(i+1),1],sequencename2, temp2[(i+1),1])
 write.table(output, outputname,quote=FALSE, col.names=FALSE,row.names=FALSE, append=TRUE)
 }
