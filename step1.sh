@@ -1,4 +1,5 @@
 ls *.1.fa | wc -l > numtaxa
+echo 0 > subfile
 
 for i in `ls *1.fa`;
 do name=`echo $i | sed 's/.1.fa//'`;
