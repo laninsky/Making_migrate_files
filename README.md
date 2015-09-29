@@ -11,7 +11,7 @@ Takes the output from the phase_everyone pipeline, and assembles it into a file 
 bash step1.sh
 ```
 
-step1A.R is pulling out all of the loci from each sample file and dumping them into locus.fasta files. These are then run through MAFFT as the output of phase_everyone strips indels. The (re)-aligned fasta files are then pulled through step1B.R to create a single consensus sequence for each sample. 
+step1A.R is pulling out all of the loci from each sample file and dumping them into locus.fasta files. These are then run through MAFFT as the output of phase_everyone strips indels. The (re)-aligned fasta files are then pulled through step1B.R to create a single consensus sequence for each sample. During these steps, if the loci names are >15 characters long and/or don't have the *.fasta suffix, they are renamed. The map of old loci names to new loci names is spat out to "locikey".
 
 #Step 2 (building the migrate file): What it needs to work
 -- Your output *.fasta files and numtaxa file from step 1 (or if you are just using this step of the script, a folder of *.fasta files from some other pipeline). The numtaxa file (if you are manually constructing it because you didn't come from step 1) is a text file with the number of taxa on the first line e.g.
