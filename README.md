@@ -1,4 +1,11 @@
 # phase_everyone_into_migrate
+There are two different migrate file types you can use the code in this repository to make. 
+
+-- Option 1 makes a locus-level migrate file. It is designed to take the output from https://github.com/laninsky/phase_everyone (fasta files by sample, not by locus). However, if you have separate fasta files per locus, with diploid genotypes for individual samples collapsed to ambiguity codes, you can probably puzzle your way to starting from Step 2 (bare in mind Migrate has some pretty severe restrictions on sample name length that Step 1 is taking care of, so you might have to do this by hand.
+
+-- Option 2 makes a SNP-level migrate file from a structure file (where 0=missing data, 1=A, 2=C, 3=G, 4=T). This structure file should have no locus-header row or pop_ID column (i.e. just the sample names and data).
+
+#Option 1: converting from fasta (DNA sequence)
 Takes the output from the phase_everyone pipeline, and assembles it into a file that can be inputted into migrate. First, it takes the phased alleles for each sample, and creates a consensus with ambiguity codes. Then it writes out these files into locus-specific fasta files using the sample names as sequence headers. Finally, it takes these files and creates the migrate file.
 
 #Step 1 (ambgooifying the phased files): What it needs to work
