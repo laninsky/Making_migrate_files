@@ -61,7 +61,6 @@ numpops <- length(popnames)
 
 numloci <- dim(temp)[2] - 1
 
-firstline <- paste(numpops,numloci,"name",sep=" ")
 secondline <- NULL
 
 #Making a separate matrix for each population, because the migrate-n files have each population sequentially in the file
@@ -85,10 +84,23 @@ temp[temp == 4] <- "T"
 
 for (i in 2:numloci) {
 
+uhoh <- 0
 misstemp <- cbind(temp[,1],temp[,i])
 misstemp <- misstemp[(misstemp[,2]!=0),]
-secondline <- paste(secondline,1," ",sep="")
 misstemplen <- dim(misstemp)[1]
+
+poplocuscheck <- key[(misstemp[,1] %in% key[,2]),1]
+for (m in 1:numpops) {
+if (!(popnames[m] %in% poplocuscheck)) {
+uhoh <- 1
+}
+}
+
+if(uhoh==1) {
+break
+}
+
+secondline <- paste(secondline,1," ",sep="")
 
 # Turning the per locus information into per population information
 for (j in 1:misstemplen) {
@@ -115,6 +127,9 @@ assign(paste("tempmatrix",m,sep=""),matrix(NA))
 }
 }
 
+###count number of loci down here and reform numloci before making firstline
+numloci <- length(unlist(strsplit(secondline," ")))
+firstline <- paste(numpops,numloci,"name",sep=" ")
 secondline <- paste(secondline,"removespace",sep="")
 secondline <- gsub(" removespace","",secondline)
 firstline <- rbind(firstline,secondline)
