@@ -89,7 +89,8 @@ misstemp <- cbind(temp[,1],temp[,i])
 misstemp <- misstemp[(misstemp[,2]!=0),]
 misstemplen <- dim(misstemp)[1]
 
-poplocuscheck <- key[(misstemp[,1] %in% key[,2]),1]
+poplocuscheck <- key[(key[,2] %in% misstemp[,1]),1]
+
 for (m in 1:numpops) {
 if (!(popnames[m] %in% poplocuscheck)) {
 uhoh <- 1
