@@ -1,8 +1,4 @@
 step1_SNP <- function(working_dir,structure_file_name) {
-}
-
-working_dir <- "C:/Users/a499a400/Dropbox/ceyx/lamarc"
-structure_file_name <- "cerit_mod_structure.txt"
 
 #Reading in our files
 setwd(working_dir)
@@ -108,7 +104,6 @@ assign(paste("recmatrix",m,sep=""),(rbind(get(paste("recmatrix",m,sep="")),toadd
 }
 }
 }
-}
 
 for (m in 1:numpops) {
 #Writing out the number of samples for each matrix into nosamples. Tempmatrix holds the locus information. The N-1 is needed because of the NA at the top of this matrix
@@ -119,8 +114,6 @@ assign(paste("locusmatrix",m,sep=""),paste(get(paste("locusmatrix",m,sep="")),no
 assign(paste("tempmatrix",m,sep=""),matrix(NA))
 }
 }
-
-
 
 secondline <- paste(secondline,"removespace",sep="")
 secondline <- gsub(" removespace","",secondline)
@@ -137,4 +130,4 @@ firstline <- rbind(firstline,data_to_bind)
 
 write.table(firstline, "migrate.txt",quote=FALSE, col.names=FALSE,row.names=FALSE)
 
-q()
+}
