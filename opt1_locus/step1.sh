@@ -1,6 +1,6 @@
-ls *.1.fa | wc -l > numtaxa
+ls --no-color *.1.fa | wc -l > numtaxa
 
-ls *.1.fa > filenames
+ls --no-color *.1.fa > filenames
 checknames=`tail -n+1 filenames | head -n1`
 cat $checknames > temp
 Rscript step1A.R;
