@@ -1,7 +1,6 @@
 temp1 <- as.matrix(read.table("temp",header=FALSE,stringsAsFactors=FALSE,sep="\t"))
 rows <- dim(temp1)[1]
 
-sedcommands <- NULL
 numname <- 1
 
 temp1 <- cbind(temp1,"")
@@ -17,18 +16,17 @@ temp1[i,2] <- temp1[i,1]
 
 rename <- temp1[which(temp1[,1]!=temp1[,2]),]
 
-for (i in 1:dim(rename)[1]) {
-sedcommandstemp <- paste("sed -i 's/",rename[i,1],"/",rename[i,2],"/' $f;",sep="")
-sedcommands <- rbind(sedcommands,sedcommandstemp)
+listfiles <- list.files(pattern=".fa")
+
+for (i in 1:length(listfiles)) {
+temp <- as.matrix(read.table(listfiles[i],header=FALSE,stringsAsFactors=FALSE,sep="\t"))
+for (j in 1:dim(rename)[1]) {
+temp[which(temp[,1]==rename[j,1]),] <- rename[j,2]
+}
+write.table(temp,listfiles[i],quote=FALSE, row.names=FALSE,col.names=FALSE)
 }
 
-
-script1 <- as.matrix(sedcommands)
-script1 <- rbind("for f in `ls *.fa`; do",script1,"done")
-
 temp1 <- rbind(c("old_name","new_name"),temp1)
-
-write.table(script1,"rename.sh",quote=FALSE, row.names=FALSE,col.names=FALSE)
 write.table(temp1,"locikey",quote=FALSE, row.names=FALSE,col.names=FALSE)
 
 q()
