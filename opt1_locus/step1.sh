@@ -1,9 +1,20 @@
-ls --no-color *.1.fa | wc -l > numtaxa
+# Getting the number of samples
+ls --color=never *.1.fa | wc -l > numtaxa
 
-ls --no-color *.1.fa > filenames
-checknames=`tail -n+1 filenames | head -n1`
-cat $checknames > temp
+# Getting a list of file names
+ls --color=never *.1.fa > filenames
+
+# Getting a list of locus names
+for i in `ls --color=never *1.fa`;
+do grep ">" $i >> temptemp;
+done;
+sort temptemp | uniq > temp
+rm -rf temptemp
+
+# Creating a script to rename loci to "more manageable names"
 Rscript step1A.R;
+
+
 bash rename.sh
 rm temp
 rm rename.sh
