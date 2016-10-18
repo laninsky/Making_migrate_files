@@ -30,6 +30,7 @@ done
 
 rm temp
 
+# Collapsing alleles for each individual into a single consensus sequence with ambiguity codes
 for i in *.fasta; 
 do name=`echo $i | sed 's/.fasta//'`;
 echo $name > tempnamefile;
