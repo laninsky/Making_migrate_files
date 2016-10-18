@@ -65,6 +65,9 @@ seqoutput <- paste(seqoutput,"R",sep="")
 if(temp2seq[j]=="T" || temp2seq[j]=="t") {
 seqoutput <- paste(seqoutput,"W",sep="")
 }
+if(temp2seq[j]=="-") {
+seqoutput <- paste(seqoutput,temp1seq[j],sep="")
+}
 }
 
 if(temp1seq[j]=="C" || temp1seq[j]=="c") {
@@ -79,6 +82,9 @@ seqoutput <- paste(seqoutput,"S",sep="")
 }
 if(temp2seq[j]=="T" || temp2seq[j]=="t") {
 seqoutput <- paste(seqoutput,"Y",sep="")
+}
+if(temp2seq[j]=="-") {
+seqoutput <- paste(seqoutput,temp1seq[j],sep="")
 }
 }
 
@@ -95,6 +101,9 @@ seqoutput <- paste(seqoutput,"S",sep="")
 if(temp2seq[j]=="T" || temp2seq[j]=="t") {
 seqoutput <- paste(seqoutput,"K",sep="")
 }
+if(temp2seq[j]=="-") {
+seqoutput <- paste(seqoutput,temp1seq[j],sep="")
+}
 }
 
 if(temp1seq[j]=="T" || temp1seq[j]=="t") {
@@ -109,6 +118,9 @@ seqoutput <- paste(seqoutput,"Y",sep="")
 }
 if(temp2seq[j]=="G" || temp2seq[j]=="g") {
 seqoutput <- paste(seqoutput,"K",sep="")
+}
+if(temp2seq[j]=="-") {
+seqoutput <- paste(seqoutput,temp1seq[j],sep="")
 }
 }
 
