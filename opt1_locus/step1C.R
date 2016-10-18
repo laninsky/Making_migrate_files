@@ -1,9 +1,8 @@
 temp <- read.table("temp",header=FALSE,stringsAsFactors=FALSE,sep="\t")
 samplename <- read.table("tempnamefile",header=FALSE,stringsAsFactors=FALSE,sep="\t")
-numtaxa <- read.table("numtaxa",header=FALSE,stringsAsFactors=FALSE,sep="\t")
 
 rows <- dim(temp)[1]
-tablelength <- as.numeric(numtaxa[1,1])*4
+tablelength <- length(grep(">",temp[,1]))*2
 
 to_write <- matrix(NA,ncol=1,nrow=tablelength)
 to_write[1,1] <- temp[1,1]
@@ -33,8 +32,8 @@ rm(temp)
 rm(to_write_seq)
 rm(to_write_title)
 
-output <- matrix(NA,ncol=1,nrow=(as.numeric(numtaxa)*2))
-ambig <- c("N","R","Y","S","W","K","M","B","D","H","V", "n","r","y","s","w","k","m","b","d","h","v")
+output <- matrix(NA,ncol=1,nrow=(tablelength/2))
+ambig <- c("N","R","Y","S","W","K","M","B","D","H","V", "n","r","y","s","w","k","m","b","d","h","v","?")
 k <- 1
 
 for (i in 1:tablelength) {
@@ -47,8 +46,9 @@ temp1seq <- unlist(strsplit(to_write[(i+1),1],""))
 temp2seq <- unlist(strsplit(to_write[(i+3),1],""))
 seqlength <- length(temp1seq)
 seqoutput <- NULL
+
 for (j in 1:seqlength) {
-if(temp1seq[j]==temp2seq[j]) {
+if(toupper(temp1seq[j])==toupper(temp2seq[j])) {
 seqoutput <- paste(seqoutput,temp1seq[j],sep="")
 } else {
 
