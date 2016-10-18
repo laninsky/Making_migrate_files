@@ -58,15 +58,15 @@ templength <- dim(temp)[1]
 
 i <- 1
 while (i <= templength) {
-k <- i+1
+e <- i+1
   if (temp[i,1]=="NEW_LOCUS") {
-while (k < templength) {
-  if(temp[k,1]=="NEW_LOCUS") {
+while (e < templength) {
+  if(temp[e,1]=="NEW_LOCUS") {
     break
     }
-  k <- k + 1
+  e <- e + 1
   }
-newtemp <- temp[(i+2):(k-1),1]
+newtemp <- temp[(i+2):(e-1),1]
 newtemplen <- length(newtemp)
 secondline <- paste(secondline,nchar(newtemp[2])," ",sep="")
 
@@ -92,7 +92,7 @@ assign(paste("locusmatrix",m,sep=""),paste(get(paste("locusmatrix",m,sep="")),no
 assign(paste("tempmatrix",m,sep=""),matrix(NA))
 }
 }
-i <- k
+i <- e
 }
 
 secondline <- paste(secondline,"removespace",sep="")
