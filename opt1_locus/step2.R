@@ -58,26 +58,23 @@ templength <- dim(temp)[1]
 
 i <- 1
 while (i <= templength) {
-if (temp[i,1]=="NEW_LOCUS") {
-newtemp <- temp[(i+2):(i+1+(2*notaxa)),1]
+k <- i+1
+  if (temp[i,1]=="NEW_LOCUS") {
+while (k < templength) {
+  if(temp[k,1]=="NEW_LOCUS") {
+    break
+    }
+  k <- k + 1
+  }
+newtemp <- temp[(i+2):(k-1),1]
 newtemplen <- length(newtemp)
-misstemp <- NULL
-for (j in 1:newtemplen) {
-if ((length(grep(">",newtemp[j])))<=0) {
-if (!(nchar(gsub("-","",(gsub("N","",newtemp[j]))))==0)) {
-misstemp <- append(misstemp, newtemp[j-1])
-misstemp <- append(misstemp, newtemp[j])
-}
-}
-}
-secondline <- paste(secondline,nchar(misstemp[2])," ",sep="")
-misstemplen <- length(misstemp)
+secondline <- paste(secondline,nchar(newtemp[2])," ",sep="")
 
-for (j in 1:misstemplen) {
+for (j in 1:newtemplen) {
 if ((length(grep(">",misstemp[j])))>0) {
 for (k in 1:notaxa) {
-if ((length(grep(key[k,2],misstemp[j])))>0) {
-toadd <- paste(key[k,3]," ",misstemp[j+1],sep="")
+if ((length(grep(key[k,2],newtemp[j])))>0) {
+toadd <- paste(key[k,3]," ",newtemp[j+1],sep="")
 for (m in 1:numpops) {
 if (key[k,1]==popnames[m]) {
 assign(paste("tempmatrix",m,sep=""),(rbind(get(paste("tempmatrix",m,sep="")),toadd)))
@@ -95,7 +92,7 @@ assign(paste("locusmatrix",m,sep=""),paste(get(paste("locusmatrix",m,sep="")),no
 assign(paste("tempmatrix",m,sep=""),matrix(NA))
 }
 }
-i <- i+1
+i <- k
 }
 
 secondline <- paste(secondline,"removespace",sep="")
