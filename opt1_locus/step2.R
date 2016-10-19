@@ -97,9 +97,6 @@ assign(paste("tempmatrix",m,sep=""),matrix(NA))
 }
 i <- e
 }
-e <- 
-
-
 
 secondline <- paste(secondline,"removespace",sep="")
 secondline <- gsub(" removespace","",secondline)
