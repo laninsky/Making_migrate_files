@@ -66,6 +66,9 @@ while (e < templength) {
     }
   e <- e + 1
   }
+if(e==(dim(temp)[1])){
+e <- e + 1
+  }
 newtemp <- temp[(i+2):(e-1),1]
 newtemplen <- length(newtemp)
 secondline <- paste(secondline,nchar(newtemp[2])," ",sep="")
@@ -94,6 +97,9 @@ assign(paste("tempmatrix",m,sep=""),matrix(NA))
 }
 i <- e
 }
+e <- 
+
+
 
 secondline <- paste(secondline,"removespace",sep="")
 secondline <- gsub(" removespace","",secondline)
