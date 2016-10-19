@@ -71,7 +71,7 @@ newtemplen <- length(newtemp)
 secondline <- paste(secondline,nchar(newtemp[2])," ",sep="")
 
 for (j in 1:newtemplen) {
-if ((length(grep(">",misstemp[j])))>0) {
+if ((length(grep(">",newtemp[j])))>0) {
 for (k in 1:notaxa) {
 if ((length(grep(key[k,2],newtemp[j])))>0) {
 toadd <- paste(key[k,3]," ",newtemp[j+1],sep="")
