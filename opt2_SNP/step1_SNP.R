@@ -91,6 +91,7 @@ misstemplen <- dim(misstemp)[1]
 
 poplocuscheck <- key[(key[,2] %in% misstemp[,1]),1]
 
+#code review 16Dec2016: I think I need to do something more elaborate than "break" here to return an error
 for (m in 1:numpops) {
 if (!(popnames[m] %in% poplocuscheck)) {
 uhoh <- 1
