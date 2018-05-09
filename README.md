@@ -17,4 +17,6 @@ This pipeline also wouldn't be possible without:
 R: R Core Team. 2015. R: A language and environment for statistical computing. URL http://www.R-project.org/. R Foundation for Statistical Computing, Vienna, Austria. https://www.r-project.org/
 
 # Version history
+v0.0.1: updated the SNP code so that it didn't break for missing populations at a locus, but just skips over and does not write that locus out.
+
 v0.0.0: still a work in progress
