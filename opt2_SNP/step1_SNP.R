@@ -99,7 +99,7 @@ uhoh <- 1
 }
 
 if(uhoh==1) {
-break
+next
 }
 
 secondline <- paste(secondline,1," ",sep="")
