@@ -6,7 +6,7 @@ You can make two different migrate file types you can using the code in this rep
 -- Option 2 makes a SNP-level migrate file from a structure file (where 0=missing data, 1=A, 2=C, 3=G, 4=T). This structure file should have no locus-header row or pop_ID column (i.e. just the sample names and data).
 
 # Suggested citation
-This code was first published in: TBD
+This code was first published in: Varanus TBD
 
 If you could cite the pub, and the progam as below, that would be lovely:
 
